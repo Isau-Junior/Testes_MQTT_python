@@ -38,8 +38,10 @@ def publish(client):
     while True:
         time.sleep(1)
         msg = 'contador: ' + str(msg_cont)
-        result = client.publish(topic, msg) #esse metodo retorna uma lista com duas posições result: [0, 1]
-                                            # na posição 0 da lista esta o status da publicação, se foi ou não publicado
+
+        # esse metodo retorna uma lista com duas posições result: [0, 1]
+        # na posição 0 da lista esta o status da publicação, se foi ou não publicado
+        result = client.publish(topic, msg, qos=0, retain=True)
         if result[0] == 0:
             print('A mensagem', msg, 'foi puplicada no topico', topic)
         else:
